@@ -1,16 +1,22 @@
 <template>
-  <div class="bg-background text-foreground min-h-dvh">
-    <div class="flex h-dvh">
+  <div class="bg-background text-foreground flex h-dvh flex-col">
+    <header
+      class="border-border bg-card flex h-16 shrink-0 items-center gap-3 border-b px-4 backdrop-blur"
+    >
+      <NuxtLink to="/" class="flex h-9 w-9 items-center justify-center">
+        <img src="/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
+      </NuxtLink>
+      <div class="border-border ml-[-1px] h-full w-px border-l" />
+      <OrgSwitcher />
+      <Icon name="lucide:chevron-right" class="text-muted-foreground h-3.5 w-3.5 shrink-0" />
+      <UiBreadcrumbs :items="breadcrumbs" class="flex-1" />
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
       <nav
         class="border-border bg-sidebar-background flex w-16 flex-col items-center gap-4 border-r px-2 py-4 backdrop-blur"
         aria-label="Icon rail"
       >
-        <NuxtLink to="/" class="flex h-10 w-10 items-center justify-center">
-          <img src="/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
-        </NuxtLink>
-
-        <div class="border-border h-px w-full border-t" />
-
         <NuxtLink
           v-for="item in railLinks"
           :key="item.to"
@@ -48,13 +54,6 @@
         class="border-border bg-sidebar-background/60 hidden w-64 flex-col gap-6 border-r px-4 py-6 backdrop-blur lg:flex"
         aria-label="Sidebar"
       >
-        <div class="space-y-1">
-          <p class="text-foreground text-sm font-semibold">UI Thing Starter</p>
-          <p class="text-muted-foreground text-xs leading-snug">
-            Nuxt playground with a counter demo and quickly themed surfaces.
-          </p>
-        </div>
-
         <div class="space-y-3">
           <p class="text-muted-foreground text-xs tracking-wide uppercase">
             {{ currentSectionLabel }}
@@ -227,4 +226,20 @@
   const currentSectionLabel = computed(() => currentSection.value?.label || "Navigation");
 
   const isActive = (path: string) => route.path === path;
+
+  const breadcrumbs = computed(() => {
+    const items: Array<{ label: string; link?: string; icon?: string }> = [];
+
+    if (currentSection.value) {
+      const sectionLink = currentSection.value.links[0]?.to || currentSectionKey.value;
+      items.push({ label: currentSection.value.label, link: sectionLink });
+
+      const currentPage = currentSection.value.links.find((l) => l.to === route.path);
+      if (currentPage) {
+        items.push({ label: currentPage.label });
+      }
+    }
+
+    return items;
+  });
 </script>
