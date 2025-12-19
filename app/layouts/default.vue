@@ -1,32 +1,34 @@
 <template>
   <div class="bg-background text-foreground flex h-dvh flex-col">
     <header
-      class="border-border bg-card flex h-16 shrink-0 items-center gap-3 border-b px-4 backdrop-blur"
+      class="border-border bg-card flex h-16 shrink-0 items-center gap-0 border-b p-0 backdrop-blur"
     >
-      <NuxtLink to="/" class="flex h-9 w-9 items-center justify-center">
-        <img src="/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
-      </NuxtLink>
-      <div class="border-border ml-[-1px] h-full w-px border-l" />
+      <div class="flex h-16 w-16 items-center justify-center border-b border-b-[#333] bg-[#1a1a1a]">
+        <NuxtLink to="/" class="flex h-9 w-9 items-center justify-center">
+          <img src="/logo.png" alt="Logo" class="h-7 w-7 object-contain" />
+        </NuxtLink>
+      </div>
+      <div class="border-border mr-4 -ml-px h-full w-px border-l" />
       <OrgSwitcher />
-      <nav class="flex flex-1 items-center gap-2 text-sm">
-        <span class="text-muted-foreground mr-2">/</span>
+      <nav class="ml-4 flex flex-1 items-center gap-2 text-sm">
+        <span class="text-muted-foreground/50 mr-2">/</span>
         <template v-for="(item, i) in breadcrumbs" :key="i">
           <NuxtLink
             v-if="item.link && i !== breadcrumbs.length - 1"
             :to="item.link"
-            class="text-muted-foreground hover:text-foreground transition-colors"
+            class="text-muted-foreground/70 hover:text-foreground transition-colors"
           >
             {{ item.label }}
           </NuxtLink>
           <span v-else class="text-primary font-medium">{{ item.label }}</span>
-          <span v-if="i < breadcrumbs.length - 1" class="text-muted-foreground mx-2">/</span>
+          <span v-if="i < breadcrumbs.length - 1" class="text-muted-foreground/50 mx-2">/</span>
         </template>
       </nav>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
       <nav
-        class="border-border bg-sidebar-background flex w-16 flex-col items-center gap-4 border-r px-2 py-4 backdrop-blur"
+        class="border-border flex w-16 flex-col items-center gap-4 border-r bg-[#1a1a1a] px-2 py-4 backdrop-blur"
         aria-label="Icon rail"
       >
         <NuxtLink
@@ -255,6 +257,22 @@
       const currentPage = currentSection.value.links.find((l) => l.to === route.path);
       if (currentPage) {
         items.push({ label: currentPage.label });
+      } else {
+        const pathSegments = route.path.split("/").filter(Boolean);
+        if (pathSegments.length > 2) {
+          const parentPath = `/${pathSegments.slice(0, -1).join("/")}`;
+          const parentPage = currentSection.value.links.find((l) => l.to === parentPath);
+          if (parentPage) {
+            items.push({ label: parentPage.label, link: parentPath });
+          }
+
+          const templateName = pathSegments[pathSegments.length - 1];
+          if (templateName) {
+            items.push({
+              label: templateName.charAt(0).toUpperCase() + templateName.slice(1),
+            });
+          }
+        }
       }
     }
 

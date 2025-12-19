@@ -35,7 +35,7 @@
       name: "Dashboard",
       description: "Analytics dashboard with stats cards, charts, and data tables.",
       category: "Admin",
-      preview: "/previews/dashboard.png",
+      preview: "/layouts/templates/dashboard",
       icon: "lucide:layout-dashboard",
     },
     {
@@ -43,7 +43,7 @@
       name: "Settings",
       description: "User settings page with grouped form sections and toggles.",
       category: "Admin",
-      preview: "/previews/settings.png",
+      preview: "/layouts/templates/settings",
       icon: "lucide:settings",
     },
     {
@@ -51,7 +51,7 @@
       name: "Profile",
       description: "User profile page with avatar, bio, and activity feed.",
       category: "Admin",
-      preview: "/previews/profile.png",
+      preview: "/layouts/templates/profile",
       icon: "lucide:user",
     },
     {
@@ -59,7 +59,7 @@
       name: "Pricing",
       description: "Pricing comparison table with feature lists and CTAs.",
       category: "Marketing",
-      preview: "/previews/pricing.png",
+      preview: "/layouts/templates/pricing",
       icon: "lucide:credit-card",
     },
     {
@@ -104,7 +104,7 @@
     },
   ]);
 
-  const openPreview = (template: LayoutTemplate) => {
-    console.log("Preview:", template.id);
+  const openPreview = async (template: LayoutTemplate) => {
+    await navigateTo(template.preview);
   };
 </script>

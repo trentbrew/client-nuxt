@@ -1,5 +1,5 @@
 <template>
-  <ui-container class="space-y-6 py-6">
+  <div class="space-y-6 py-6">
     <div class="space-y-2">
       <p class="text-xs tracking-[0.18em] text-purple-300 uppercase">Settings</p>
       <h1 class="text-foreground text-3xl font-semibold">Project settings</h1>
@@ -65,7 +65,7 @@
         >
       </div>
     </div>
-  </ui-container>
+  </div>
 </template>
 
 <script setup lang="ts">
