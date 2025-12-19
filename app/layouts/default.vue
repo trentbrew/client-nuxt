@@ -8,8 +8,20 @@
       </NuxtLink>
       <div class="border-border ml-[-1px] h-full w-px border-l" />
       <OrgSwitcher />
-      <Icon name="lucide:chevron-right" class="text-muted-foreground h-3.5 w-3.5 shrink-0" />
-      <UiBreadcrumbs :items="breadcrumbs" class="flex-1" />
+      <nav class="flex flex-1 items-center gap-2 text-sm">
+        <span class="text-muted-foreground mr-2">/</span>
+        <template v-for="(item, i) in breadcrumbs" :key="i">
+          <NuxtLink
+            v-if="item.link && i !== breadcrumbs.length - 1"
+            :to="item.link"
+            class="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {{ item.label }}
+          </NuxtLink>
+          <span v-else class="text-primary font-medium">{{ item.label }}</span>
+          <span v-if="i < breadcrumbs.length - 1" class="text-muted-foreground mx-2">/</span>
+        </template>
+      </nav>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
@@ -146,6 +158,12 @@
     "/layouts": {
       label: "Layouts",
       links: [
+        {
+          to: "/layouts/templates",
+          label: "Templates",
+          icon: "lucide:layout-grid",
+          tint: "text-violet-300",
+        },
         {
           to: "/layouts/playground",
           label: "Playground",
