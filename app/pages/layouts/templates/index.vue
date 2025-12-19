@@ -1,13 +1,11 @@
 <template>
-  <div class="space-y-8">
-    <div class="space-y-2">
-      <p class="text-xs tracking-[0.18em] text-sky-300 uppercase">Layouts</p>
-      <h1 class="text-foreground text-3xl font-semibold">Page templates</h1>
-      <p class="text-muted-foreground max-w-2xl text-sm">
-        A collection of ready-to-use page layouts and templates for common UI patterns.
-      </p>
-    </div>
-
+  <Page
+    subtitle="Layouts"
+    subtitle-color="text-sky-300"
+    title="Page templates"
+    description="A collection of ready-to-use page layouts and templates for common UI patterns."
+    container-class="space-y-8"
+  >
     <div class="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
       <LayoutCard
         v-for="template in templates"
@@ -16,7 +14,7 @@
         @preview="openPreview"
       />
     </div>
-  </div>
+  </Page>
 </template>
 
 <script lang="ts" setup>

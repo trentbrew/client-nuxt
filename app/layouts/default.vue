@@ -24,7 +24,42 @@
           <span v-if="i < breadcrumbs.length - 1" class="text-muted-foreground/50 mx-2">/</span>
         </template>
       </nav>
+      <div class="mr-4 flex items-center">
+        <button
+          type="button"
+          @click="commandDialog.open()"
+          class="text-muted-foreground hover:text-foreground flex h-9 w-64 items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <Icon name="lucide:search" class="h-4 w-4 shrink-0 opacity-50" />
+          <span class="flex-1 text-left">Search...</span>
+          <UiKbd class="hidden sm:flex">
+            <span class="text-xs">⌘</span>K
+          </UiKbd>
+        </button>
+      </div>
     </header>
+
+    <!-- Command Dialog -->
+    <UiCommandDialog v-model:open="commandDialog.isOpen" title="Command Palette" description="Search for pages and navigate quickly">
+      <UiCommandInput placeholder="Search pages..." />
+      <UiCommandList>
+        <UiCommandEmpty>No results found.</UiCommandEmpty>
+        <template v-for="(section, sectionKey) in navSections" :key="sectionKey">
+          <UiCommandGroup :heading="section.label">
+            <UiCommandItem
+              v-for="link in section.links"
+              :key="link.to"
+              :value="`${section.label} ${link.label}`"
+              @select="() => navigateTo(link.to)"
+            >
+              <Icon :name="link.icon" class="h-4 w-4" :class="link.tint" />
+              <span>{{ link.label }}</span>
+              <UiCommandShortcut v-if="link.badge">{{ link.badge }}</UiCommandShortcut>
+            </UiCommandItem>
+          </UiCommandGroup>
+        </template>
+      </UiCommandList>
+    </UiCommandDialog>
 
     <div class="flex flex-1 overflow-hidden">
       <nav
@@ -114,6 +149,13 @@
 
 <script lang="ts" setup>
   const route = useRoute();
+  const router = useRouter();
+  const commandDialog = useCommandDialog();
+
+  const navigateTo = (path: string) => {
+    router.push(path);
+    commandDialog.close();
+  };
 
   const railLinks = [
     { to: "/forms/feed", label: "Home", icon: "lucide:home" },

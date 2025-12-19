@@ -1,15 +1,12 @@
 <template>
-  <div class="space-y-6">
-    <div class="space-y-2">
-      <p class="inline-flex items-center text-xs tracking-[0.18em] text-blue-300 uppercase">
-        <BackButton />
-        Dashboard
-      </p>
-      <h1 class="text-foreground text-3xl font-semibold">Analytics Overview</h1>
-      <p class="text-muted-foreground max-w-2xl text-sm">
-        Track your key metrics and performance indicators at a glance.
-      </p>
-    </div>
+  <Page
+    subtitle="Dashboard"
+    subtitle-color="text-blue-300"
+    title="Analytics Overview"
+    description="Track your key metrics and performance indicators at a glance."
+    show-back-button
+    container-class="space-y-6"
+  >
 
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div class="border-border bg-card rounded-xl border p-6">
@@ -87,5 +84,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </Page>
 </template>
