@@ -7,14 +7,11 @@
           class="bg-background/95 border-b border-border p-6 pl-8 backdrop-blur-3xl supports-[backdrop-filter]:bg-background/60"
         >
           <!-- Subtitle with optional back button and icon -->
-          <div class="flex items-center justify-between">
-            <div v-if="subtitle || showBackButton || icon" class="inline-flex items-center gap-2">
+          <div class="flex items-center justify-between mb-2">
+            <div v-if="subtitle || showBackButton || icon" class="inline-flex items-center gap-0">
               <BackButton v-if="showBackButton" />
-              <Icon v-if="icon" :name="icon" :class="iconClass" />
-              <p
-                v-if="subtitle"
-                :class="['text-xs uppercase tracking-[0.18em]', subtitleColor || 'text-muted-foreground']"
-              >
+              <Icon v-if="icon" :name="icon" :class="`${iconClass} ${subtitleColor} mr-2`" />
+              <p v-if="subtitle" :class="['text-xs uppercase', subtitleColor || 'text-muted-foreground']">
                 {{ subtitle }}
               </p>
             </div>
@@ -42,7 +39,7 @@
           </div>
 
           <!-- Title -->
-          <h1 v-if="title || $slots.title" class="text-foreground text-3xl font-semibold">
+          <h1 v-if="title || $slots.title" class="text-foreground text-3xl font-semibold mb-2">
             <slot name="title">{{ title }}</slot>
           </h1>
           <!-- Description -->
@@ -81,7 +78,7 @@
       </div>
 
       <!-- Main Content -->
-      <div v-if="$slots.default" :class="[contentClass, fillHeight ? 'min-h-0 flex-1 overflow-auto' : 'p-6 pt-0']">
+      <div v-if="$slots.default" :class="[contentClass, fillHeight ? 'min-h-0 flex-1 overflow-auto' : 'p-4 pt-0']">
         <slot :is-full-width="isFullWidth" />
       </div>
     </div>

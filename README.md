@@ -2,8 +2,6 @@
 
 Looking to start a new Nuxt project? Look no further! UI Thing Starter is the perfect template to kickstart your development.
 
-![UI Thing Starter Image](/public/cover.jpeg)
-
 ## Demo
 
 You can find a live demo of UI Thing Starter at [Counter Demo](https://ui-thing-starter.behonbaker.com/)

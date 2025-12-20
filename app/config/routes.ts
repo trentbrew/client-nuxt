@@ -223,6 +223,76 @@ export const routeConfig: RouteConfig[] = [
               showBackButton: true,
             },
           },
+          {
+            path: '/layouts/templates/landing',
+            label: 'Landing page',
+            icon: 'lucide:rocket',
+            tint: 'text-orange-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Landing page template',
+              description: 'Hero section with features, testimonials, and footer.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-orange-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/blog',
+            label: 'Blog',
+            icon: 'lucide:newspaper',
+            tint: 'text-blue-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Blog template',
+              description: 'Blog listing with cards, filters, and pagination.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-blue-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/auth',
+            label: 'Authentication',
+            icon: 'lucide:lock',
+            tint: 'text-purple-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Authentication template',
+              description: 'Login, signup, and password reset forms.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-purple-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/empty',
+            label: 'Empty state',
+            icon: 'lucide:inbox',
+            tint: 'text-yellow-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Empty state template',
+              description: 'Placeholder for empty data views with action prompts.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-yellow-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/error',
+            label: 'Error pages',
+            icon: 'lucide:alert-triangle',
+            tint: 'text-red-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Error pages template',
+              description: '404, 500, and maintenance page templates.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-red-300',
+              showBackButton: true,
+            },
+          },
         ],
       },
       {
@@ -508,21 +578,50 @@ export function getSidebarSection(path: string): RouteConfig | null {
 }
 
 /**
+ * Recursively find a route by path in the route config tree
+ */
+function findRouteByPath(routes: RouteConfig[], targetPath: string): RouteConfig | null {
+  for (const route of routes) {
+    if (route.path === targetPath) {
+      return route
+    }
+    if (route.children) {
+      const found = findRouteByPath(route.children, targetPath)
+      if (found) return found
+    }
+  }
+  return null
+}
+
+/**
  * Get breadcrumbs for a given path
+ * Builds breadcrumbs dynamically from all path segments
  */
 export function getBreadcrumbs(path: string): Array<{ label: string; path?: string }> {
   const breadcrumbs: Array<{ label: string; path?: string }> = []
-  const allRoutes = flattenRoutes(routeConfig)
 
-  // Find the current route
-  const currentRoute = allRoutes.find((r) => r.path === path)
-  if (!currentRoute) return breadcrumbs
+  // Split path into segments (e.g., '/layouts/templates/empty' -> ['layouts', 'templates', 'empty'])
+  const segments = path.split('/').filter(Boolean)
 
-  // Find parent section
-  const section = getSidebarSection(path)
-  if (section) {
-    breadcrumbs.push({ label: section.label, path: section.children?.[0]?.path })
-    breadcrumbs.push({ label: currentRoute.label })
+  if (segments.length === 0) return breadcrumbs
+
+  // Build breadcrumbs for each path segment
+  for (let i = 0; i < segments.length; i++) {
+    // Build the path up to this segment
+    const segmentPath = '/' + segments.slice(0, i + 1).join('/')
+
+    // Find the route config for this path segment
+    const route = findRouteByPath(routeConfig, segmentPath)
+
+    if (route) {
+      // Add breadcrumb for this segment
+      // Only add path if it's not the last segment (current page)
+      const isLastSegment = i === segments.length - 1
+      breadcrumbs.push({
+        label: route.label,
+        path: isLastSegment ? undefined : segmentPath,
+      })
+    }
   }
 
   return breadcrumbs

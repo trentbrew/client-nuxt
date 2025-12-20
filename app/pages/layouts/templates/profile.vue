@@ -1,11 +1,12 @@
 <template>
-  <div class="space-y-6">
-    <div class="space-y-2">
-      <p class="inline-flex items-center text-xs tracking-[0.18em] text-green-300 uppercase">
-        <BackButton />
-        Profile
-      </p>
-    </div>
+  <Page
+    subtitle="Templates"
+    subtitle-color="text-purple-300"
+    title="Profile"
+    description="User profile page with avatar, bio, and activity feed."
+    show-back-button
+    container-class="space-y-6"
+  >
     <div class="border-border bg-card rounded-xl border p-6">
       <div class="flex items-start gap-6">
         <div class="bg-primary/10 flex h-24 w-24 shrink-0 items-center justify-center rounded-full">
@@ -17,18 +18,13 @@
             <p class="text-muted-foreground mt-1 text-sm">@johndoe</p>
           </div>
           <p class="text-foreground max-w-2xl text-sm">
-            Product designer and developer. Building beautiful interfaces and experiences for the
-            web.
+            Product designer and developer. Building beautiful interfaces and experiences for the web.
           </p>
           <div class="flex gap-2">
-            <button
-              class="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-medium"
-            >
+            <button class="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-medium">
               Edit profile
             </button>
-            <button
-              class="border-border bg-background text-foreground rounded-lg border px-4 py-2 text-sm font-medium"
-            >
+            <button class="border-border bg-background text-foreground rounded-lg border px-4 py-2 text-sm font-medium">
               Share
             </button>
           </div>
@@ -88,5 +84,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </Page>
 </template>

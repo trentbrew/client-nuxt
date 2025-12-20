@@ -111,7 +111,7 @@
       </nav>
 
       <aside
-        class="border-border bg-sidebar-background/60 hidden w-64 flex-col border-r px-4 py-6 backdrop-blur lg:flex"
+        class="border-border bg-sidebar-background/60 hidden w-64 flex-col border-r px-4 pt-6 pb-4 backdrop-blur lg:flex"
         aria-label="Sidebar"
       >
         <!-- Sidebar section items animate per rail route (client-only to avoid hydration mismatches from localStorage/pins) -->

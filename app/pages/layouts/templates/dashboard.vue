@@ -7,8 +7,7 @@
     show-back-button
     container-class="space-y-6"
   >
-
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-4">
       <div class="border-border bg-card rounded-xl border p-6">
         <div class="flex items-center justify-between">
           <p class="text-muted-foreground text-sm font-medium">Total Revenue</p>

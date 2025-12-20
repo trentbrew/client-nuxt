@@ -1,18 +1,12 @@
 <template>
-  <div class="space-y-12 py-12">
-    <div class="space-y-4 text-center">
-      <p
-        class="inline-flex items-center justify-center text-xs tracking-[0.18em] text-blue-300 uppercase"
-      >
-        <BackButton />
-        Pricing
-      </p>
-      <h1 class="text-foreground text-4xl font-bold">Choose your plan</h1>
-      <p class="text-muted-foreground mx-auto max-w-2xl text-lg">
-        Simple, transparent pricing that grows with you. Try any plan free for 30 days.
-      </p>
-    </div>
-
+  <Page
+    subtitle="Templates"
+    subtitle-color="text-green-300"
+    title="Choose your plan"
+    description="Simple, transparent pricing that grows with you. Try any plan free for 30 days."
+    show-back-button
+    container-class="space-y-12"
+  >
     <div class="grid gap-8 lg:grid-cols-3">
       <div class="border-border bg-card rounded-xl border p-8">
         <div class="space-y-4">
@@ -53,9 +47,7 @@
             <span class="text-foreground text-4xl font-bold">$29</span>
             <span class="text-muted-foreground text-sm">/month</span>
           </div>
-          <button
-            class="bg-primary text-primary-foreground w-full rounded-lg px-4 py-2 text-sm font-medium"
-          >
+          <button class="bg-primary text-primary-foreground w-full rounded-lg px-4 py-2 text-sm font-medium">
             Get started
           </button>
         </div>
@@ -91,5 +83,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </Page>
 </template>

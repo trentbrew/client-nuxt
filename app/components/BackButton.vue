@@ -9,13 +9,16 @@
 </template>
 
 <script setup lang="ts">
-  const route = useRoute();
+  import { useAppNavigate } from '~/composables/useAppNavigate'
 
-  const goBack = () => {
-    const pathSegments = route.path.split("/").filter(Boolean);
+  const route = useRoute()
+  const appNavigate = useAppNavigate()
+
+  const goBack = async () => {
+    const pathSegments = route.path.split('/').filter(Boolean)
     if (pathSegments.length > 2) {
-      const parentPath = `/${pathSegments.slice(0, -1).join("/")}`;
-      navigateTo(parentPath);
+      const parentPath = `/${pathSegments.slice(0, -1).join('/')}`
+      await appNavigate.navigate(parentPath)
     }
-  };
+  }
 </script>

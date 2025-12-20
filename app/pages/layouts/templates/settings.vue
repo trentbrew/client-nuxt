@@ -1,16 +1,12 @@
 <template>
-  <div class="space-y-6">
-    <div class="space-y-2">
-      <p class="inline-flex items-center text-xs tracking-[0.18em] text-purple-300 uppercase">
-        <BackButton />
-        Settings
-      </p>
-      <h1 class="text-foreground text-3xl font-semibold">Account Settings</h1>
-      <p class="text-muted-foreground max-w-2xl text-sm">
-        Manage your account settings and preferences.
-      </p>
-    </div>
-
+  <Page
+    subtitle="Templates"
+    subtitle-color="text-gray-300"
+    title="Account Settings"
+    description="Manage your account settings and preferences."
+    show-back-button
+    container-class="space-y-6"
+  >
     <div class="space-y-6">
       <div class="border-border bg-card rounded-xl border">
         <div class="border-border border-b p-6">
@@ -78,9 +74,7 @@
       </div>
 
       <div class="flex justify-end gap-3">
-        <button
-          class="border-border bg-background text-foreground rounded-lg border px-4 py-2 text-sm font-medium"
-        >
+        <button class="border-border bg-background text-foreground rounded-lg border px-4 py-2 text-sm font-medium">
           Cancel
         </button>
         <button class="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-medium">
@@ -88,5 +82,5 @@
         </button>
       </div>
     </div>
-  </div>
+  </Page>
 </template>
