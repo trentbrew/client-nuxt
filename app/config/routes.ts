@@ -338,6 +338,20 @@ export const routeConfig: RouteConfig[] = [
           subtitleColor: 'text-emerald-300',
         },
       },
+      {
+        path: '/layouts/flow',
+        label: 'Flow Editor',
+        icon: 'lucide:workflow',
+        tint: 'text-rose-300',
+        inCommandPalette: true,
+        order: 5,
+        meta: {
+          title: 'Vue Flow Demo',
+          description: 'Interactive node-based flow editor with custom nodes, minimap, controls, and background.',
+          subtitle: 'Layouts',
+          subtitleColor: 'text-rose-300',
+        },
+      },
     ],
   },
   {

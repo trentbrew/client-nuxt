@@ -1,20 +1,17 @@
 <script lang="ts" setup>
-  import { useAppNavigate, handleBrowserNavigation } from '~/composables/useAppNavigate'
+  import { handleBrowserNavigation } from '~/composables/useAppNavigate'
 
   useHead({
     htmlAttrs: { lang: 'en' },
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.ico' }],
   })
 
-  const pageEl = ref<HTMLElement | null>(null)
-  const appNavigate = useAppNavigate()
   const route = useRoute()
 
-  let previousPath = ref('')
+  const previousPath = ref('')
   let isInitialMount = true
 
   onMounted(() => {
-    appNavigate.registerPageElement(pageEl.value)
     previousPath.value = route.path
     isInitialMount = false
 
@@ -40,19 +37,13 @@
       { flush: 'post' },
     )
   })
-
-  onBeforeUnmount(() => {
-    appNavigate.registerPageElement(null)
-  })
 </script>
 
 <template>
   <div>
     <NuxtRouteAnnouncer />
     <NuxtLayout>
-      <div ref="pageEl" class="page-transition-wrapper bg-background">
-        <NuxtPage />
-      </div>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
