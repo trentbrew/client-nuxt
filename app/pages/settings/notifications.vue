@@ -1,7 +1,10 @@
 <template>
-  <Page subtitle="Notifications" subtitle-color="text-pink-300" title="Inbox"
+  <Page
+    subtitle="Notifications"
+    title="Inbox"
     description="Placeholder inbox for alerts, releases, and system messages. Connect to your real notification service."
-    fill-height>
+    fill-height
+  >
     <UiEmpty class="h-full border bg-card/50">
       <UiEmptyMedia>
         <div class="flex size-16 items-center justify-center rounded-full bg-muted">

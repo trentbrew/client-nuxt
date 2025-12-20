@@ -1,14 +1,3 @@
-<template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtLayout>
-      <div ref="pageEl" class="page-transition-wrapper">
-        <NuxtPage />
-      </div>
-    </NuxtLayout>
-  </div>
-</template>
-
 <script lang="ts" setup>
   import { useAppNavigate, handleBrowserNavigation } from '~/composables/useAppNavigate'
 
@@ -56,3 +45,14 @@
     appNavigate.registerPageElement(null)
   })
 </script>
+
+<template>
+  <div>
+    <NuxtRouteAnnouncer />
+    <NuxtLayout>
+      <div ref="pageEl" class="page-transition-wrapper bg-background">
+        <NuxtPage />
+      </div>
+    </NuxtLayout>
+  </div>
+</template>

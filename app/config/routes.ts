@@ -477,12 +477,26 @@ export const routeConfig: RouteConfig[] = [
         },
       },
       {
+        path: '/settings/appearance',
+        label: 'Appearance',
+        icon: 'lucide:palette',
+        tint: 'text-purple-300',
+        inCommandPalette: true,
+        order: 2,
+        meta: {
+          title: 'Appearance',
+          description: 'Customize the look and feel of your application with themes and display preferences.',
+          subtitle: 'Settings',
+          subtitleColor: 'text-purple-300',
+        },
+      },
+      {
         path: '/settings/profile',
         label: 'Profile',
         icon: 'lucide:user',
         tint: 'text-sky-300',
         inCommandPalette: true,
-        order: 2,
+        order: 3,
         meta: {
           title: 'Your profile',
           description: 'Manage your account information, avatar, and personal preferences.',
@@ -497,7 +511,7 @@ export const routeConfig: RouteConfig[] = [
         tint: 'text-pink-300',
         badge: '3',
         inCommandPalette: true,
-        order: 3,
+        order: 4,
         meta: {
           title: 'Notifications',
           description: 'Configure email alerts, push notifications, and in-app messages.',

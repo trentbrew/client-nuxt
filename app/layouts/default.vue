@@ -1,15 +1,18 @@
 <template>
+  <!-- Root: base layer -->
   <div class="bg-background text-foreground flex h-dvh flex-col">
-    <header class="border-border bg-card flex h-16 shrink-0 items-center gap-0 border-b p-0 backdrop-blur">
-      <div class="flex h-16 w-16 items-center justify-center border-b bg-sidebar">
+    <!-- App Header: Navigation shell (matches icon rail) -->
+    <header class="border-border bg-foreground/5 flex h-16 shrink-0 items-center gap-0 border-b p-0">
+      <!-- Logo container: part of navigation shell -->
+      <div class="flex h-16 w-16 items-center justify-center border-b border-transparent">
         <AppNavLink to="/" class="flex h-9 w-9 items-center justify-center">
-          <img src="/logo.png" alt="Logo" class="h-7 w-7 object-contain" />
+          <AppLogo :size="28" color-class="text-primary" />
         </AppNavLink>
       </div>
       <div class="border-border mr-4 -ml-px h-full w-px border-l" />
       <OrgSwitcher />
       <nav class="ml-4 flex flex-1 items-center gap-2 text-sm">
-        <span class="text-muted-foreground/50 mr-2">/</span>
+        <span class="text-muted-foreground/50 mr-2 -ml-2">/</span>
         <template v-for="(item, i) in routes.breadcrumbs.value" :key="i">
           <template v-if="item?.label">
             <AppNavLink
@@ -28,7 +31,7 @@
         <button
           type="button"
           @click="commandDialog.open()"
-          class="text-muted-foreground hover:text-foreground flex h-9 w-64 items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+          class="text-muted-foreground hover:text-foreground flex h-9 w-64 items-center gap-2 rounded-md border border-border bg-background/50 px-3 py-2 text-sm transition-colors hover:bg-background/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Icon name="lucide:search" class="h-4 w-4 shrink-0 opacity-50" />
           <span class="flex-1 text-left">Search...</span>
@@ -60,7 +63,7 @@
                 :value="`${group.label} ${routeItem.label}`"
                 @select="() => navigateTo(routeItem.path)"
               >
-                <Icon :name="routeItem.icon" class="h-4 w-4" :class="routeItem.tint" />
+                <Icon :name="routeItem.icon" class="h-4 w-4" />
                 <span>{{ routeItem.label }}</span>
                 <UiCommandShortcut v-if="routes.getRouteBadge(routeItem)">
                   {{ routes.getRouteBadge(routeItem) }}
@@ -73,17 +76,18 @@
     </UiCommandDialog>
 
     <div class="flex flex-1 overflow-hidden">
+      <!-- Icon Rail: Navigation shell (matches app header) -->
       <nav
-        class="border-border flex w-16 flex-col items-center gap-4 border-r bg-sidebar px-2 py-4 backdrop-blur"
+        class="border-border flex w-16 flex-col items-center gap-4 border-r bg-foreground/5 px-2 py-4"
         aria-label="Icon rail"
       >
         <template v-for="item in routes.primaryRailRoutes.value" :key="item?.path || ''">
           <AppNavLink
             v-if="item?.path"
             :to="item.path"
-            class="group text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-10 w-10 items-center justify-center rounded-xl transition"
+            class="group text-muted-foreground hover:bg-foreground/10 hover:text-foreground flex h-10 w-10 items-center justify-center rounded-xl transition"
             :class="{
-              'bg-accent text-accent-foreground shadow-[0_0_0_1px_hsl(var(--border))]': routes.isRouteActive(item.path),
+              'bg-primary/15 text-foreground': routes.isRouteActive(item.path),
             }"
             :aria-label="item.label"
           >
@@ -96,11 +100,9 @@
             <AppNavLink
               v-if="item?.path"
               :to="item.path"
-              class="group text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-10 w-10 items-center justify-center rounded-xl transition"
+              class="group text-muted-foreground hover:bg-foreground/10 hover:text-foreground flex h-10 w-10 items-center justify-center rounded-xl transition"
               :class="{
-                'bg-accent text-accent-foreground shadow-[0_0_0_1px_hsl(var(--border))]': routes.isRouteActive(
-                  item.path,
-                ),
+                'bg-primary/15 text-foreground': routes.isRouteActive(item.path),
               }"
               :aria-label="item.label"
             >
@@ -110,8 +112,9 @@
         </div>
       </nav>
 
+      <!-- Sidebar: Content frame (matches page header) -->
       <aside
-        class="border-border bg-sidebar-background/60 hidden w-64 flex-col border-r px-4 pt-6 pb-4 backdrop-blur lg:flex"
+        class="border-border bg-foreground/3 hidden w-64 flex-col border-r px-4 pt-6 pb-4 lg:flex"
         aria-label="Sidebar"
       >
         <!-- Sidebar section items animate per rail route (client-only to avoid hydration mismatches from localStorage/pins) -->
@@ -161,10 +164,10 @@
                         <AppNavLink
                           v-if="item?.path"
                           :to="item.path"
-                          class="text-foreground/80 hover:bg-accent flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
-                          :class="{ 'bg-accent text-accent-foreground': routes.isRouteActive(item.path) }"
+                          class="text-muted-foreground hover:bg-foreground/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
+                          :class="{ 'bg-primary/15 text-foreground': routes.isRouteActive(item.path) }"
                         >
-                          <Icon :name="item.icon" class="h-4 w-4" :class="item.tint" />
+                          <Icon :name="item.icon" class="h-4 w-4" />
                           <span class="flex-1">{{ item.label }}</span>
                           <span
                             v-if="routes.getRouteBadge(item)"
@@ -226,10 +229,10 @@
                         <AppNavLink
                           v-if="item?.path"
                           :to="item.path"
-                          class="text-foreground/80 hover:bg-accent flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
-                          :class="{ 'bg-accent text-accent-foreground': routes.isRouteActive(item.path) }"
+                          class="text-muted-foreground hover:bg-foreground/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
+                          :class="{ 'bg-primary/15 text-foreground': routes.isRouteActive(item.path) }"
                         >
-                          <Icon :name="item.icon" class="h-4 w-4" :class="item.tint" />
+                          <Icon :name="item.icon" class="h-4 w-4" />
                           <span class="flex-1">{{ item.label }}</span>
                           <span
                             v-if="routes.getRouteBadge(item)"
@@ -268,10 +271,10 @@
                     <AppNavLink
                       v-if="item?.path"
                       :to="item.path"
-                      class="text-foreground/80 hover:bg-accent flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
-                      :class="{ 'bg-accent text-accent-foreground': routes.isRouteActive(item.path) }"
+                      class="text-muted-foreground hover:bg-foreground/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 pr-8 transition"
+                      :class="{ 'bg-primary/15 text-foreground': routes.isRouteActive(item.path) }"
                     >
-                      <Icon :name="item.icon" class="h-4 w-4" :class="item.tint" />
+                      <Icon :name="item.icon" class="h-4 w-4" />
                       <span class="flex-1">{{ item.label }}</span>
                     </AppNavLink>
                   </li>
@@ -281,7 +284,8 @@
           </template>
         </ClientOnly>
 
-        <div class="mt-auto border-border bg-muted/50 rounded-xl border p-3">
+        <!-- Quick tip: elevated card element -->
+        <div class="mt-auto border-border bg-card rounded-xl border p-3">
           <p class="text-foreground text-xs font-semibold">Quick tip</p>
           <p class="text-muted-foreground mt-1 text-xs leading-relaxed">
             Press Shift + Option + D to open Nuxt DevTools and inspect routes, data, and assets.
@@ -289,7 +293,7 @@
         </div>
       </aside>
 
-      <main class="bg-background flex-1 overflow-y-auto p-0" aria-label="Main content">
+      <main class="bg-transparent flex-1 overflow-y-auto p-0" aria-label="Main content">
         <slot />
       </main>
     </div>

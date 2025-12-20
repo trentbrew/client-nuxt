@@ -1,17 +1,19 @@
 <template>
   <div :class="finalContainerClass">
-    <div :class="contentWrapperClass">
+    <!-- Main content uses base background (darkest layer) -->
+    <div :class="contentWrapperClass + ' bg-background'">
       <!-- Header Section -->
-      <div v-if="subtitle || title || description || $slots.header" class="sticky top-0 z-10 shrink-0 space-y-2">
-        <div
-          class="bg-background/95 border-b border-border p-6 pl-8 backdrop-blur-3xl supports-[backdrop-filter]:bg-background/60"
-        >
+      <div
+        v-if="subtitle || title || description || $slots.header"
+        class="sticky top-0 z-10 shrink-0 space-y-2 bg-foreground/2"
+      >
+        <div class="bg-foreground/2 border-b border-border p-6 pl-8 backdrop-blur-xl">
           <!-- Subtitle with optional back button and icon -->
           <div class="flex items-center justify-between mb-2">
             <div v-if="subtitle || showBackButton || icon" class="inline-flex items-center gap-0">
               <BackButton v-if="showBackButton" />
               <Icon v-if="icon" :name="icon" :class="`${iconClass} ${subtitleColor} mr-2`" />
-              <p v-if="subtitle" :class="['text-xs uppercase', subtitleColor || 'text-muted-foreground']">
+              <p v-if="subtitle" :class="['text-xs uppercase tracking-wide', subtitleColor || 'text-primary']">
                 {{ subtitle }}
               </p>
             </div>
@@ -22,7 +24,7 @@
                 <UiTooltipTrigger as-child>
                   <button
                     type="button"
-                    class="text-muted-foreground hover:text-foreground hover:bg-accent flex h-8 w-8 items-center justify-center rounded-lg transition"
+                    class="text-muted-foreground hover:text-foreground hover:bg-foreground/10 flex h-8 w-8 items-center justify-center rounded-lg transition"
                     @click="toggleWidth"
                   >
                     <Icon :name="isFullWidth ? 'lucide:minimize-2' : 'lucide:maximize-2'" class="h-4 w-4" />
@@ -78,7 +80,7 @@
       </div>
 
       <!-- Main Content -->
-      <div v-if="$slots.default" :class="[contentClass, fillHeight ? 'min-h-0 flex-1 overflow-auto' : 'p-4 pt-0']">
+      <div v-if="$slots.default" :class="[contentClass, fillHeight ? 'min-h-0 flex-1 overflow-auto' : 'p-6 pt-0']">
         <slot :is-full-width="isFullWidth" />
       </div>
     </div>
@@ -139,7 +141,7 @@
 
   // Load preference from localStorage after hydration completes (client-only)
   onMounted(() => {
-    if (process.client) {
+    if (import.meta.client) {
       // Wait for next tick to ensure hydration is complete
       nextTick(() => {
         const stored = localStorage.getItem(storageKey.value)
@@ -153,7 +155,7 @@
   // Toggle width and persist preference
   function toggleWidth() {
     isFullWidth.value = !isFullWidth.value
-    if (process.client) {
+    if (import.meta.client) {
       localStorage.setItem(storageKey.value, String(isFullWidth.value))
     }
   }

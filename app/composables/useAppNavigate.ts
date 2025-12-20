@@ -10,7 +10,7 @@ const isPlainLeftClick = (e: MouseEvent) => {
 }
 
 const performTransition = async (direction: 'forward' | 'back' = 'forward', skipLeave = false) => {
-  if (!process.client || !pageElement || isTransitioning) return
+  if (!import.meta.client || !pageElement || isTransitioning) return
 
   isTransitioning = true
   const el = pageElement
@@ -76,7 +76,7 @@ export const useAppNavigate = () => {
     if (!to || to === route.path) return
 
     // If we're not on the client or we don't have a target element yet, just navigate.
-    if (!process.client || !pageElement) {
+    if (!import.meta.client || !pageElement) {
       await router.push(to)
       return
     }
