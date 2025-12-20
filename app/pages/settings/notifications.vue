@@ -1,16 +1,19 @@
 <template>
-  <ui-container class="space-y-6 py-6">
-    <div class="space-y-2">
-      <p class="text-xs uppercase tracking-[0.18em] text-pink-300">Notifications</p>
-      <h1 class="text-3xl font-semibold text-white">Inbox</h1>
-      <p class="max-w-2xl text-sm text-slate-300">
-        Placeholder inbox for alerts, releases, and system messages. Connect to your real notification service.
-      </p>
-    </div>
-
-    <div class="rounded-2xl border border-white/5 bg-white/5 p-4 shadow-inner shadow-white/5">
-      <p class="text-sm font-semibold text-white">No messages yet</p>
-      <p class="mt-1 text-sm text-slate-300">When hooked up, this area will show unread and recent notices.</p>
-    </div>
-  </ui-container>
+  <Page subtitle="Notifications" subtitle-color="text-pink-300" title="Inbox"
+    description="Placeholder inbox for alerts, releases, and system messages. Connect to your real notification service."
+    fill-height>
+    <UiEmpty class="h-full border bg-card/50">
+      <UiEmptyMedia>
+        <div class="flex size-16 items-center justify-center rounded-full bg-muted">
+          <Icon name="lucide:inbox" class="size-7 text-muted-foreground" />
+        </div>
+      </UiEmptyMedia>
+      <UiEmptyContent>
+        <UiEmptyTitle>No messages yet</UiEmptyTitle>
+        <UiEmptyDescription>
+          When hooked up, this area will show unread and recent notices from your notification service.
+        </UiEmptyDescription>
+      </UiEmptyContent>
+    </UiEmpty>
+  </Page>
 </template>

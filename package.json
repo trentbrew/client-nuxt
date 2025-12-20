@@ -19,7 +19,8 @@
     "prepare": "husky",
     "preview": "nuxt preview",
     "test": "vitest",
-    "ui:add": "npx -y ui-thing@latest add"
+    "ui:add": "npx -y ui-thing@latest add",
+    "validate:routes": "tsx scripts/validate-routes.ts"
   },
   "lint-staged": {
     "*.{ts,vue}": "eslint --fix",
@@ -89,6 +90,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tw-animate-css": "^1.3.7",
     "typescript": "^5.9.2",
+    "tsx": "^4.19.2",
     "vitest": "^3.2.4"
   },
   "engines": {

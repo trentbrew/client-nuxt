@@ -1,5 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 
+import { routeValidator } from "./vite-plugins/route-validator";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -34,8 +36,8 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.PUBLIC_URL || "https://counter.uithing.com/",
-    name: "Counter - UI Thing Starter",
+    url: process.env.PUBLIC_URL || "https://markform.app/",
+    name: "Markform",
   },
 
   colorMode: { classSuffix: "", storageKey: "ui-thing-starter-color-mode" },
@@ -51,11 +53,12 @@ export default defineNuxtConfig({
   css: ["~/assets/css/tailwind.css"],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), routeValidator()],
   },
 
   app: {
     head: {
+      titleTemplate: "%s | Markform",
       script: [
         {
           src: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js",

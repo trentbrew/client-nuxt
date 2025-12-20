@@ -27,50 +27,50 @@
 
 export interface RouteConfig {
   /** The route path (e.g., '/forms/feed') */
-  path: string;
+  path: string
   /** Display label for the route */
-  label: string;
+  label: string
   /** Icon name (e.g., 'lucide:home') */
-  icon: string;
+  icon: string
   /** Optional color tint for icon */
-  tint?: string;
+  tint?: string
   /** Optional badge text */
-  badge?: string | (() => string | number);
+  badge?: string | (() => string | number)
   /** Page metadata */
   meta?: {
     /** Page title */
-    title?: string;
+    title?: string
     /** Page description */
-    description?: string;
+    description?: string
     /** SEO title (if different from display title) */
-    seoTitle?: string;
+    seoTitle?: string
     /** SEO description */
-    seoDescription?: string;
+    seoDescription?: string
     /** Subtitle for Page component */
-    subtitle?: string;
+    subtitle?: string
     /** Subtitle color */
-    subtitleColor?: string;
+    subtitleColor?: string
     /** Show back button */
-    showBackButton?: boolean;
+    showBackButton?: boolean
     /** Full width page */
-    fullWidth?: boolean;
-  };
+    fullWidth?: boolean
+  }
   /** Whether this route should appear in rail navigation */
-  inRail?: boolean;
+  inRail?: boolean
   /** Rail position: 'primary' | 'secondary' */
-  railPosition?: "primary" | "secondary";
+  railPosition?: 'primary' | 'secondary'
   /** Whether this route should appear in command palette */
-  inCommandPalette?: boolean;
+  inCommandPalette?: boolean
   /** Command palette search keywords (for better search) */
-  searchKeywords?: string[];
+  searchKeywords?: string[]
   /** Child routes (for nested navigation) */
-  children?: RouteConfig[];
+  children?: RouteConfig[]
   /** Whether route requires authentication */
-  requiresAuth?: boolean;
+  requiresAuth?: boolean
   /** Custom visibility function */
-  visible?: () => boolean;
+  visible?: () => boolean
   /** Order in navigation (lower = appears first) */
-  order?: number;
+  order?: number
 }
 
 /**
@@ -79,269 +79,401 @@ export interface RouteConfig {
  */
 export const routeConfig: RouteConfig[] = [
   {
-    path: "/forms",
-    label: "Forms",
-    icon: "lucide:file-text",
-    tint: "text-emerald-300",
+    path: '/forms',
+    label: 'Forms',
+    icon: 'lucide:file-text',
+    tint: 'text-emerald-300',
+    inRail: true,
+    railPosition: 'primary',
+    order: 1,
     meta: {
-      subtitle: "Forms",
-      subtitleColor: "text-emerald-300",
+      title: 'Forms',
+      description: 'Create, manage, and analyze your forms and surveys.',
+      subtitle: 'Forms',
+      subtitleColor: 'text-emerald-300',
     },
     children: [
       {
-        path: "/forms/feed",
-        label: "Live counter",
-        icon: "lucide:loader-2",
-        tint: "text-emerald-300",
-        inRail: true,
-        railPosition: "primary",
+        path: '/forms/feed',
+        label: 'Live counter',
+        icon: 'lucide:loader-2',
+        tint: 'text-emerald-300',
         inCommandPalette: true,
         order: 1,
         meta: {
-          title: "Live Counter",
-          description: "A simple counter application built with Nuxt & UI Thing.",
+          title: 'Live Counter',
+          description: 'A simple counter application built with Nuxt & UI Thing.',
+          subtitle: 'Forms',
+          subtitleColor: 'text-emerald-300',
         },
       },
       {
-        path: "/forms/new",
-        label: "Create form",
-        icon: "lucide:square-plus",
-        tint: "text-sky-300",
+        path: '/forms/new',
+        label: 'Create form',
+        icon: 'lucide:square-plus',
+        tint: 'text-sky-300',
         inCommandPalette: true,
         order: 2,
         meta: {
-          title: "Create form",
+          title: 'Create form',
           description:
-            "Placeholder builder canvas. Drop in your drag-and-drop fields, schema editor, or AI scaffolding UI.",
-          subtitle: "Forms",
-          subtitleColor: "text-sky-300",
+            'Placeholder builder canvas. Drop in your drag-and-drop fields, schema editor, or AI scaffolding UI.',
+          subtitle: 'Forms',
+          subtitleColor: 'text-sky-300',
         },
       },
       {
-        path: "/forms/library",
-        label: "Templates",
-        icon: "lucide:library",
-        tint: "text-indigo-300",
+        path: '/forms/library',
+        label: 'Templates',
+        icon: 'lucide:library',
+        tint: 'text-indigo-300',
         inCommandPalette: true,
         order: 3,
         meta: {
-          title: "Template library",
-          description:
-            "Placeholder gallery for form templates. Wire this to your presets or spaces marketplace.",
-          subtitle: "Forms",
-          subtitleColor: "text-indigo-300",
+          title: 'Template library',
+          description: 'Placeholder gallery for form templates. Wire this to your presets or spaces marketplace.',
+          subtitle: 'Forms',
+          subtitleColor: 'text-indigo-300',
         },
       },
     ],
   },
   {
-    path: "/layouts",
-    label: "Layouts",
-    icon: "lucide:layout-dashboard",
-    tint: "text-violet-300",
+    path: '/layouts',
+    label: 'Layouts',
+    icon: 'lucide:layout-dashboard',
+    tint: 'text-violet-300',
+    inRail: true,
+    railPosition: 'primary',
+    order: 2,
     meta: {
-      subtitle: "Layouts",
-      subtitleColor: "text-violet-300",
+      title: 'Layouts',
+      description: 'Explore page templates, shells, and reusable UI patterns.',
+      subtitle: 'Layouts',
+      subtitleColor: 'text-violet-300',
     },
     children: [
       {
-        path: "/layouts/templates",
-        label: "Templates",
-        icon: "lucide:layout-grid",
-        tint: "text-violet-300",
-        inRail: true,
-        railPosition: "primary",
+        path: '/layouts/templates',
+        label: 'Templates',
+        icon: 'lucide:layout-grid',
+        tint: 'text-violet-300',
         inCommandPalette: true,
         order: 1,
         meta: {
-          title: "Page templates",
+          title: 'Page templates',
+          description: 'A collection of ready-to-use page layouts and templates for common UI patterns.',
+          subtitle: 'Layouts',
+          subtitleColor: 'text-sky-300',
+        },
+        children: [
+          {
+            path: '/layouts/templates/dashboard',
+            label: 'Dashboard',
+            icon: 'lucide:layout-dashboard',
+            tint: 'text-blue-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Dashboard template',
+              description: 'Analytics dashboard layout with stats, charts, and data tables.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-blue-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/pricing',
+            label: 'Pricing',
+            icon: 'lucide:credit-card',
+            tint: 'text-green-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Pricing template',
+              description: 'Pricing page layout with plan comparison and feature lists.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-green-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/profile',
+            label: 'Profile',
+            icon: 'lucide:user',
+            tint: 'text-purple-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Profile template',
+              description: 'User profile page with avatar, bio, and activity feed.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-purple-300',
+              showBackButton: true,
+            },
+          },
+          {
+            path: '/layouts/templates/settings',
+            label: 'Settings',
+            icon: 'lucide:settings',
+            tint: 'text-gray-300',
+            inCommandPalette: true,
+            meta: {
+              title: 'Settings template',
+              description: 'Settings page layout with tabs and form sections.',
+              subtitle: 'Templates',
+              subtitleColor: 'text-gray-300',
+              showBackButton: true,
+            },
+          },
+        ],
+      },
+      {
+        path: '/layouts/playground',
+        label: 'Playground',
+        icon: 'lucide:layout-template',
+        tint: 'text-sky-300',
+        inCommandPalette: true,
+        order: 2,
+        meta: {
+          title: 'Layout playground',
           description:
-            "A collection of ready-to-use page layouts and templates for common UI patterns.",
-          subtitle: "Layouts",
-          subtitleColor: "text-sky-300",
+            'Placeholder route for layout experiments. Swap in your own sections, grids, and responsive shells here.',
+          subtitle: 'Layouts',
+          subtitleColor: 'text-sky-300',
         },
       },
       {
-        path: "/layouts/playground",
-        label: "Playground",
-        icon: "lucide:layout-template",
-        tint: "text-sky-300",
-        inRail: true,
-        railPosition: "primary",
-        inCommandPalette: true,
-        order: 2,
-      },
-      {
-        path: "/layouts/shells",
-        label: "Shells",
-        icon: "lucide:panels-top-left",
-        tint: "text-cyan-300",
+        path: '/layouts/shells',
+        label: 'Shells',
+        icon: 'lucide:panels-top-left',
+        tint: 'text-cyan-300',
         inCommandPalette: true,
         order: 3,
+        meta: {
+          title: 'App shells',
+          description: 'Reusable application shell patterns with sidebars, headers, and content areas.',
+          subtitle: 'Layouts',
+          subtitleColor: 'text-cyan-300',
+        },
       },
       {
-        path: "/layouts/sections",
-        label: "Sections",
-        icon: "lucide:rows",
-        tint: "text-emerald-300",
+        path: '/layouts/sections',
+        label: 'Sections',
+        icon: 'lucide:rows',
+        tint: 'text-emerald-300',
         inCommandPalette: true,
         order: 4,
+        meta: {
+          title: 'Page sections',
+          description: 'Modular content sections for building landing pages and feature showcases.',
+          subtitle: 'Layouts',
+          subtitleColor: 'text-emerald-300',
+        },
       },
     ],
   },
   {
-    path: "/tokens",
-    label: "Design tokens",
-    icon: "lucide:swatch-book",
-    tint: "text-indigo-300",
+    path: '/tokens',
+    label: 'Design tokens',
+    icon: 'lucide:swatch-book',
+    tint: 'text-indigo-300',
+    inRail: true,
+    railPosition: 'primary',
+    order: 5,
+    inCommandPalette: true,
     meta: {
-      subtitle: "Design tokens",
-      subtitleColor: "text-indigo-300",
+      title: 'Design tokens',
+      description: "Explore your design system's colors, typography, and spacing scales.",
+      subtitle: 'Design tokens',
+      subtitleColor: 'text-indigo-300',
     },
     children: [
       {
-        path: "/tokens",
-        label: "Overview",
-        icon: "lucide:swatch-book",
-        tint: "text-indigo-300",
+        path: '/tokens/colors',
+        label: 'Colors',
+        icon: 'lucide:palette',
+        tint: 'text-pink-300',
         inCommandPalette: true,
         order: 1,
+        meta: {
+          title: 'Color palette',
+          description: 'Design system color tokens including primary, semantic, and neutral scales.',
+          subtitle: 'Design tokens',
+          subtitleColor: 'text-pink-300',
+        },
       },
       {
-        path: "/tokens/colors",
-        label: "Colors",
-        icon: "lucide:palette",
-        tint: "text-pink-300",
+        path: '/tokens/type',
+        label: 'Typography',
+        icon: 'lucide:type',
+        tint: 'text-amber-300',
         inCommandPalette: true,
         order: 2,
-      },
-      {
-        path: "/tokens/type",
-        label: "Typography",
-        icon: "lucide:type",
-        tint: "text-amber-300",
-        inCommandPalette: true,
-        order: 3,
         meta: {
-          title: "Typography kit",
+          title: 'Typography kit',
           description:
-            "Placeholder specimens for headings, body, labels, and numeric styles. Replace with your type scale.",
-          subtitle: "Design tokens",
-          subtitleColor: "text-amber-300",
+            'Placeholder specimens for headings, body, labels, and numeric styles. Replace with your type scale.',
+          subtitle: 'Design tokens',
+          subtitleColor: 'text-amber-300',
         },
       },
     ],
   },
   {
-    path: "/activity",
-    label: "Activity",
-    icon: "lucide:activity",
-    tint: "text-orange-300",
+    path: '/activity',
+    label: 'Activity',
+    icon: 'lucide:activity',
+    tint: 'text-orange-300',
+    inRail: true,
+    railPosition: 'primary',
+    order: 3,
     meta: {
-      subtitle: "Activity",
-      subtitleColor: "text-orange-300",
+      title: 'Activity',
+      description: 'Monitor form responses, analytics, and engagement in real-time.',
+      subtitle: 'Activity',
+      subtitleColor: 'text-orange-300',
     },
     children: [
       {
-        path: "/activity/feed",
-        label: "Feed",
-        icon: "lucide:activity",
-        tint: "text-orange-300",
-        inRail: true,
-        railPosition: "primary",
-        inCommandPalette: true,
-        order: 1,
-      },
-      {
-        path: "/activity/analytics",
-        label: "Analytics",
-        icon: "lucide:chart-line",
-        tint: "text-lime-300",
-        inCommandPalette: true,
-        order: 2,
-      },
-      {
-        path: "/activity/responses",
-        label: "Responses",
-        icon: "lucide:inbox",
-        tint: "text-sky-300",
-        badge: "24",
-        inCommandPalette: true,
-        order: 3,
-      },
-    ],
-  },
-  {
-    path: "/settings",
-    label: "Settings",
-    icon: "lucide:settings",
-    tint: "text-purple-300",
-    meta: {
-      subtitle: "Settings",
-      subtitleColor: "text-purple-300",
-    },
-    children: [
-      {
-        path: "/settings/project",
-        label: "Project",
-        icon: "lucide:settings",
-        tint: "text-purple-300",
-        inRail: true,
-        railPosition: "primary",
+        path: '/activity/feed',
+        label: 'Feed',
+        icon: 'lucide:activity',
+        tint: 'text-orange-300',
         inCommandPalette: true,
         order: 1,
         meta: {
-          title: "Project settings",
-          description: "Customize your experience with toggles and preferences.",
-          subtitle: "Settings",
-          subtitleColor: "text-purple-300",
+          title: 'Activity feed',
+          description: 'Real-time stream of form submissions, responses, and system events.',
+          subtitle: 'Activity',
+          subtitleColor: 'text-orange-300',
         },
       },
       {
-        path: "/settings/profile",
-        label: "Profile",
-        icon: "lucide:user",
-        tint: "text-sky-300",
-        inRail: true,
-        railPosition: "secondary",
+        path: '/activity/analytics',
+        label: 'Analytics',
+        icon: 'lucide:chart-line',
+        tint: 'text-lime-300',
         inCommandPalette: true,
         order: 2,
+        meta: {
+          title: 'Analytics dashboard',
+          description: 'Visualize response trends, completion rates, and engagement metrics.',
+          subtitle: 'Activity',
+          subtitleColor: 'text-lime-300',
+        },
       },
       {
-        path: "/settings/notifications",
-        label: "Notifications",
-        icon: "lucide:bell",
-        tint: "text-pink-300",
-        badge: "3",
-        inRail: true,
-        railPosition: "secondary",
+        path: '/activity/responses',
+        label: 'Responses',
+        icon: 'lucide:inbox',
+        tint: 'text-sky-300',
+        badge: '24',
         inCommandPalette: true,
         order: 3,
+        meta: {
+          title: 'Form responses',
+          description: 'Browse and manage all form submissions in one place.',
+          subtitle: 'Activity',
+          subtitleColor: 'text-sky-300',
+        },
       },
     ],
   },
-];
+  {
+    path: '/settings',
+    label: 'Settings',
+    icon: 'lucide:settings',
+    tint: 'text-purple-300',
+    inRail: true,
+    railPosition: 'secondary',
+    order: 4,
+    meta: {
+      title: 'Settings',
+      description: 'Configure your project, profile, and notification preferences.',
+      subtitle: 'Settings',
+      subtitleColor: 'text-purple-300',
+    },
+    children: [
+      {
+        path: '/settings/project',
+        label: 'Project',
+        icon: 'lucide:settings',
+        tint: 'text-purple-300',
+        inCommandPalette: true,
+        order: 1,
+        meta: {
+          title: 'Project settings',
+          description: 'Customize your experience with toggles and preferences.',
+          subtitle: 'Settings',
+          subtitleColor: 'text-purple-300',
+        },
+      },
+      {
+        path: '/settings/profile',
+        label: 'Profile',
+        icon: 'lucide:user',
+        tint: 'text-sky-300',
+        inCommandPalette: true,
+        order: 2,
+        meta: {
+          title: 'Your profile',
+          description: 'Manage your account information, avatar, and personal preferences.',
+          subtitle: 'Settings',
+          subtitleColor: 'text-sky-300',
+        },
+      },
+      {
+        path: '/settings/notifications',
+        label: 'Notifications',
+        icon: 'lucide:bell',
+        tint: 'text-pink-300',
+        badge: '3',
+        inCommandPalette: true,
+        order: 3,
+        meta: {
+          title: 'Notifications',
+          description: 'Configure email alerts, push notifications, and in-app messages.',
+          subtitle: 'Settings',
+          subtitleColor: 'text-pink-300',
+        },
+      },
+    ],
+  },
+]
 
 /**
  * Flatten route tree for easier access
+ * Only includes routes that are actual pages (not parent containers)
  */
 export function flattenRoutes(routes: RouteConfig[]): RouteConfig[] {
-  const flattened: RouteConfig[] = [];
+  const flattened: RouteConfig[] = []
 
   function traverse(route: RouteConfig) {
-    // Add route itself if it has a path (not just a parent)
-    if (route.path && route.path !== route.label.toLowerCase()) {
-      flattened.push(route);
+    // Recursively process children first
+    if (route.children && route.children.length > 0) {
+      route.children.forEach(traverse)
     }
 
-    // Recursively add children
-    if (route.children) {
-      route.children.forEach(traverse);
+    // Only add routes that have a path
+    // Skip parent routes that only exist to group children
+    // A route is a parent-only if it has children and all children are under its path
+    if (route.path) {
+      const hasChildren = route.children && route.children.length > 0
+      if (!hasChildren) {
+        // Leaf node - always include
+        flattened.push(route)
+      } else {
+        // Has children - only include if it's explicitly marked as a page
+        // (For now, we'll include all routes with paths, but filter out section headers)
+        // Section headers typically don't have inRail, inCommandPalette, etc.
+        if (route.inRail || route.inCommandPalette !== false) {
+          flattened.push(route)
+        }
+      }
     }
   }
 
-  routes.forEach(traverse);
-  return flattened;
+  routes.forEach(traverse)
+  // Final safety check - ensure all routes have paths
+  return flattened.filter((route) => route && route.path)
 }
 
 /**
@@ -349,17 +481,17 @@ export function flattenRoutes(routes: RouteConfig[]): RouteConfig[] {
  */
 export function getCommandPaletteRoutes(): RouteConfig[] {
   return flattenRoutes(routeConfig)
-    .filter((route) => route.inCommandPalette !== false)
-    .sort((a, b) => (a.order || 999) - (b.order || 999));
+    .filter((route) => route?.path && route.inCommandPalette !== false)
+    .sort((a, b) => (a.order || 999) - (b.order || 999))
 }
 
 /**
  * Get routes for rail navigation
  */
-export function getRailRoutes(position: "primary" | "secondary"): RouteConfig[] {
+export function getRailRoutes(position: 'primary' | 'secondary'): RouteConfig[] {
   return flattenRoutes(routeConfig)
-    .filter((route) => route.inRail && route.railPosition === position)
-    .sort((a, b) => (a.order || 999) - (b.order || 999));
+    .filter((route) => route?.path && route.inRail && route.railPosition === position)
+    .sort((a, b) => (a.order || 999) - (b.order || 999))
 }
 
 /**
@@ -367,42 +499,40 @@ export function getRailRoutes(position: "primary" | "secondary"): RouteConfig[] 
  */
 export function getSidebarSection(path: string): RouteConfig | null {
   // Find the section that matches the path prefix
-  const sections = routeConfig.filter((section) => path.startsWith(section.path));
+  const sections = routeConfig.filter((section) => path.startsWith(section.path))
 
-  if (sections.length === 0) return null;
+  if (sections.length === 0) return null
 
   // Return the most specific match (longest path)
-  return sections.reduce((prev, current) =>
-    current.path.length > prev.path.length ? current : prev
-  );
+  return sections.reduce((prev, current) => (current.path.length > prev.path.length ? current : prev))
 }
 
 /**
  * Get breadcrumbs for a given path
  */
 export function getBreadcrumbs(path: string): Array<{ label: string; path?: string }> {
-  const breadcrumbs: Array<{ label: string; path?: string }> = [];
-  const allRoutes = flattenRoutes(routeConfig);
+  const breadcrumbs: Array<{ label: string; path?: string }> = []
+  const allRoutes = flattenRoutes(routeConfig)
 
   // Find the current route
-  const currentRoute = allRoutes.find((r) => r.path === path);
-  if (!currentRoute) return breadcrumbs;
+  const currentRoute = allRoutes.find((r) => r.path === path)
+  if (!currentRoute) return breadcrumbs
 
   // Find parent section
-  const section = getSidebarSection(path);
+  const section = getSidebarSection(path)
   if (section) {
-    breadcrumbs.push({ label: section.label, path: section.children?.[0]?.path });
-    breadcrumbs.push({ label: currentRoute.label });
+    breadcrumbs.push({ label: section.label, path: section.children?.[0]?.path })
+    breadcrumbs.push({ label: currentRoute.label })
   }
 
-  return breadcrumbs;
+  return breadcrumbs
 }
 
 /**
  * Get route metadata for a given path
  */
-export function getRouteMeta(path: string): RouteConfig["meta"] | null {
-  const allRoutes = flattenRoutes(routeConfig);
-  const route = allRoutes.find((r) => r.path === path);
-  return route?.meta || null;
+export function getRouteMeta(path: string): RouteConfig['meta'] | null {
+  const allRoutes = flattenRoutes(routeConfig)
+  const route = allRoutes.find((r) => r.path === path)
+  return route?.meta || null
 }
