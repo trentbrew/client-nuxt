@@ -82,7 +82,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.6.2",
     "@iconify-json/lucide": "^1.2.63",
     "@nuxt/test-utils": "^3.19.2",
-    "@pinia/testing": "^1.0.2",
+    "@pinia/testing": "^1.0.3",
     "@playwright/test": "1.57.0",
     "@testing-library/vue": "^8.1.0",
     "@vue/test-utils": "^2.4.6",
